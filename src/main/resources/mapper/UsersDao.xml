@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.dao.UsersDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.entity.UsersEntity" id="usersMap">
+        <result property="phone" column="phone"/>
+        <result property="pwd" column="pwd"/>
+        <result property="yzm" column="yzm"/>
+        <result property="yzmExpire" column="yzm_expire"/>
+        <result property="role" column="role"/>
+        <result property="realname" column="realname"/>
+        <result property="age" column="age"/>
+        <result property="gender" column="gender"/>
+        <result property="province" column="province"/>
+        <result property="city" column="city"/>
+        <result property="area" column="area"/>
+        <result property="balance" column="balance"/>
+        <result property="refMoney" column="ref_money"/>
+        <result property="picCareer" column="pic_career"/>
+        <result property="identity" column="identity"/>
+        <result property="picIdcardZ" column="pic_idcard_z"/>
+        <result property="picIdcardF" column="pic_idcard_f"/>
+        <result property="picHead" column="pic_head"/>
+        <result property="telephone" column="telephone"/>
+        <result property="picPerCom" column="pic_per_com"/>
+        <result property="picWorkcard" column="pic_workcard"/>
+        <result property="picPersonalCard" column="pic_personal_card"/>
+        <result property="workOrg" column="work_org"/>
+        <result property="bank" column="bank"/>
+        <result property="alipay" column="alipay"/>
+        <result property="wechat" column="wechat"/>
+        <result property="refLink" column="ref_link"/>
+        <result property="refCode" column="ref_code"/>
+        <result property="busDesc" column="bus_desc"/>
+        <result property="busTag" column="bus_tag"/>
+        <result property="empState" column="emp_state"/>
+        <result property="custState" column="cust_state"/>
+        <result property="busState" column="bus_state"/>
+        <result property="addTime" column="add_time"/>
+        <result property="accountType" column="account_type"/>
+        <result property="refereeCust" column="referee_cust"/>
+        <result property="refereeBus" column="referee_bus"/>
+        <result property="bz1" column="bz1"/>
+        <result property="bz2" column="bz2"/>
+        <result property="bz3" column="bz3"/>
+        <result property="bz4" column="bz4"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="io.renren.entity.UsersEntity">
+		select * from users where phone = #{value}
+	</select>
+
+	<select id="queryList" resultType="io.renren.entity.UsersEntity">
+		select * from users
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by phone desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from users 
+	</select>
+	 
+	<insert id="save" parameterType="io.renren.entity.UsersEntity">
+		insert into users
+		(
+			`phone`, 
+			`pwd`, 
+			`yzm`, 
+			`yzm_expire`, 
+			`role`, 
+			`realname`, 
+			`age`, 
+			`gender`, 
+			`province`, 
+			`city`, 
+			`area`, 
+			`balance`, 
+			`ref_money`, 
+			`pic_career`, 
+			`identity`, 
+			`pic_idcard_z`, 
+			`pic_idcard_f`, 
+			`pic_head`, 
+			`telephone`, 
+			`pic_per_com`, 
+			`pic_workcard`, 
+			`pic_personal_card`, 
+			`work_org`, 
+			`bank`, 
+			`alipay`, 
+			`wechat`, 
+			`ref_link`, 
+			`ref_code`, 
+			`bus_desc`, 
+			`bus_tag`, 
+			`emp_state`, 
+			`cust_state`, 
+			`bus_state`, 
+			`add_time`, 
+			`account_type`, 
+			`referee_cust`, 
+			`referee_bus`, 
+			`bz1`, 
+			`bz2`, 
+			`bz3`, 
+			`bz4`
+		)
+		values
+		(
+			#{phone}, 
+			#{pwd}, 
+			#{yzm}, 
+			#{yzmExpire}, 
+			#{role}, 
+			#{realname}, 
+			#{age}, 
+			#{gender}, 
+			#{province}, 
+			#{city}, 
+			#{area}, 
+			#{balance}, 
+			#{refMoney}, 
+			#{picCareer}, 
+			#{identity}, 
+			#{picIdcardZ}, 
+			#{picIdcardF}, 
+			#{picHead}, 
+			#{telephone}, 
+			#{picPerCom}, 
+			#{picWorkcard}, 
+			#{picPersonalCard}, 
+			#{workOrg}, 
+			#{bank}, 
+			#{alipay}, 
+			#{wechat}, 
+			#{refLink}, 
+			#{refCode}, 
+			#{busDesc}, 
+			#{busTag}, 
+			#{empState}, 
+			#{custState}, 
+			#{busState}, 
+			#{addTime}, 
+			#{accountType}, 
+			#{refereeCust}, 
+			#{refereeBus}, 
+			#{bz1}, 
+			#{bz2}, 
+			#{bz3}, 
+			#{bz4}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="io.renren.entity.UsersEntity">
+		update users 
+		<set>
+			<if test="pwd != null">`pwd` = #{pwd}, </if>
+			<if test="yzm != null">`yzm` = #{yzm}, </if>
+			<if test="yzmExpire != null">`yzm_expire` = #{yzmExpire}, </if>
+			<if test="role != null">`role` = #{role}, </if>
+			<if test="realname != null">`realname` = #{realname}, </if>
+			<if test="age != null">`age` = #{age}, </if>
+			<if test="gender != null">`gender` = #{gender}, </if>
+			<if test="province != null">`province` = #{province}, </if>
+			<if test="city != null">`city` = #{city}, </if>
+			<if test="area != null">`area` = #{area}, </if>
+			<if test="balance != null">`balance` = #{balance}, </if>
+			<if test="refMoney != null">`ref_money` = #{refMoney}, </if>
+			<if test="picCareer != null">`pic_career` = #{picCareer}, </if>
+			<if test="identity != null">`identity` = #{identity}, </if>
+			<if test="picIdcardZ != null">`pic_idcard_z` = #{picIdcardZ}, </if>
+			<if test="picIdcardF != null">`pic_idcard_f` = #{picIdcardF}, </if>
+			<if test="picHead != null">`pic_head` = #{picHead}, </if>
+			<if test="telephone != null">`telephone` = #{telephone}, </if>
+			<if test="picPerCom != null">`pic_per_com` = #{picPerCom}, </if>
+			<if test="picWorkcard != null">`pic_workcard` = #{picWorkcard}, </if>
+			<if test="picPersonalCard != null">`pic_personal_card` = #{picPersonalCard}, </if>
+			<if test="workOrg != null">`work_org` = #{workOrg}, </if>
+			<if test="bank != null">`bank` = #{bank}, </if>
+			<if test="alipay != null">`alipay` = #{alipay}, </if>
+			<if test="wechat != null">`wechat` = #{wechat}, </if>
+			<if test="refLink != null">`ref_link` = #{refLink}, </if>
+			<if test="refCode != null">`ref_code` = #{refCode}, </if>
+			<if test="busDesc != null">`bus_desc` = #{busDesc}, </if>
+			<if test="busTag != null">`bus_tag` = #{busTag}, </if>
+			<if test="empState != null">`emp_state` = #{empState}, </if>
+			<if test="custState != null">`cust_state` = #{custState}, </if>
+			<if test="busState != null">`bus_state` = #{busState}, </if>
+			<if test="addTime != null">`add_time` = #{addTime}, </if>
+			<if test="accountType != null">`account_type` = #{accountType}, </if>
+			<if test="refereeCust != null">`referee_cust` = #{refereeCust}, </if>
+			<if test="refereeBus != null">`referee_bus` = #{refereeBus}, </if>
+			<if test="bz1 != null">`bz1` = #{bz1}, </if>
+			<if test="bz2 != null">`bz2` = #{bz2}, </if>
+			<if test="bz3 != null">`bz3` = #{bz3}, </if>
+			<if test="bz4 != null">`bz4` = #{bz4}</if>
+		</set>
+		where phone = #{phone}
+	</update>
+	
+	<delete id="delete">
+		delete from users where phone = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from users where phone in 
+		<foreach item="phone" collection="array" open="(" separator="," close=")">
+			#{phone}
+		</foreach>
+	</delete>
+
+</mapper>
