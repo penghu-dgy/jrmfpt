@@ -1,1 +1,3 @@
+this is a.txt
 this is b.test
+this is begin add idea change...
